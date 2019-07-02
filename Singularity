@@ -4,7 +4,7 @@ Stage: build
 
 %environment
     export DOWNWARD_REPO=/fast-downward
-    export DOWNWARD_BENCHMARKS=$HOME/downward-benchmarks
+    export DOWNWARD_BENCHMARKS=/downward-benchmarks
 
 %post
     apt update -y
@@ -22,6 +22,8 @@ Stage: build
     python3 -m venv /lab-venv
     . /lab-venv/bin/activate
     echo '. /lab-venv/bin/activate' >> $SINGULARITY_ENVIRONMENT
+
+    hg clone https://bitbucket.org/aibasel/downward-benchmarks /downward-benchmarks
 
     hg clone http://hg.fast-downward.org /fast-downward
     cd /fast-downward && ./build.py
